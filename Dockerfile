@@ -1,8 +1,7 @@
-FROM python:3.9.2-slim-buster
+FROM python:alpine
 RUN mkdir /bot && chmod 777 /bot
 WORKDIR /bot
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt -qq update && apt -qq install -y git wget pv jq wget python3-dev ffmpeg mediainfo
+RUN apk update && apt add git wget pv jq wget ffmpeg mediainfo
 COPY . .
 RUN pip3 install -r requirements.txt
 CMD ["bash","run.sh"]
